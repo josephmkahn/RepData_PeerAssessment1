@@ -71,21 +71,28 @@ legend('topright',lty=2,col=c('red','blue'),legend=c("Median","Mean"))
 summary(DD$dailysteps)
 MeanStepsPerDay <- mean(DD$dailysteps)
 MedianStepsPerDay <- median(DD$dailysteps)
+MaxInterval <- DMM$interval[DMM$meansteps==max(DMM$meansteps)]
+
 
 ```
-Median steps Per Day: `r MedianStepsPerDay`
-Mean steps Per Day: `r MeanStepsPerDay`
+* Median steps Per Day: `r MedianStepsPerDay`
+* Mean steps Per Day: `r MeanStepsPerDay`
 
 ## What is the average daily activity pattern?
+* Interval with max mean steps is `r MaxInterval` 
+
+Here's asummary plot of mean and median across all days:
+
 ```{r fig.height=5, fig.width=5}
-# summarize mean and median across all days
-  
 plot(DMM$interval,pmax(DMM$mediansteps,DMM$meansteps),type='n',
   main = "Daily steps vs. interval, all days",xlab="interval",ylab="steps")
 lines(DMM$interval,DMM$mediansteps,col='red')
 lines(DMM$interval,DMM$meansteps,col='blue')
+abline(h=MaxInterval)
 grid()
 legend('topright',lty=1,col=c('red','blue'),legend=c("Median","Mean"))
+
+
 
 ```
 
@@ -94,8 +101,9 @@ legend('topright',lty=1,col=c('red','blue'),legend=c("Median","Mean"))
 Nnas <- sum(is.na(DA$steps))
 Nrows <- dim(DA)[1] 
 ```
-In the original data, there were `r Nnas` NAs out of `r Nrows` intervals.
-Imputation substituted median value across all days for each interval, in place of NAs.
+* In the original data, there were `r Nnas` NAs out of `r Nrows` intervals.
+
+* Imputation substituted median value across all days for each interval, in place of NAs.
 
 ## Are there differences in activity patterns between weekdays and weekends?
 Yes, see the plot differences!

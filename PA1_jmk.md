@@ -8,7 +8,7 @@ date()
 ```
 
 ```
-## [1] "Sun May 18 15:48:23 2014"
+## [1] "Sun May 18 16:18:06 2014"
 ```
 
 ```r
@@ -136,25 +136,34 @@ summary(DD$dailysteps)
 ```r
 MeanStepsPerDay <- mean(DD$dailysteps)
 MedianStepsPerDay <- median(DD$dailysteps)
+MaxInterval <- DMM$interval[DMM$meansteps == max(DMM$meansteps)]
+
 ```
 
-Median steps Per Day: 10395
-Mean steps Per Day: 9503.8689
+* Median steps Per Day: 10395
+* Mean steps Per Day: 9503.8689
 
 ## What is the average daily activity pattern?
+* Interval with max mean steps is 835 
+
+Here's asummary plot of mean and median across all days:
+
 
 ```r
-# summarize mean and median across all days
-
 plot(DMM$interval, pmax(DMM$mediansteps, DMM$meansteps), type = "n", main = "Daily steps vs. interval, all days", 
     xlab = "interval", ylab = "steps")
 lines(DMM$interval, DMM$mediansteps, col = "red")
 lines(DMM$interval, DMM$meansteps, col = "blue")
+abline(h = MaxInterval)
 grid()
 legend("topright", lty = 1, col = c("red", "blue"), legend = c("Median", "Mean"))
 ```
 
 ![plot of chunk unnamed-chunk-3](figure/unnamed-chunk-3.png) 
+
+```r
+
+```
 
 
 ## Imputing missing values
@@ -164,8 +173,9 @@ Nnas <- sum(is.na(DA$steps))
 Nrows <- dim(DA)[1]
 ```
 
-In the original data, there were 2304 NAs out of 17568 intervals.
-Imputation substituted median value across all days for each interval, in place of NAs.
+* In the original data, there were 2304 NAs out of 17568 intervals.
+
+* Imputation substituted median value across all days for each interval, in place of NAs.
 
 ## Are there differences in activity patterns between weekdays and weekends?
 Yes, see the plot differences!
