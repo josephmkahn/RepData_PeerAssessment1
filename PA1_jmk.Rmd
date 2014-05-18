@@ -87,12 +87,15 @@ lines(DMM$interval,DMM$meansteps,col='blue')
 grid()
 legend('topright',lty=1,col=c('red','blue'),legend=c("Median","Mean"))
 
-
 ```
 
 ## Imputing missing values
-Imputation substituted median value across all days for each interval, in place of NAs 
-
+```{r }
+Nnas <- sum(is.na(DA$steps))
+Nrows <- dim(DA)[1] 
+```
+In the original data, there were `r Nnas` NAs out of `r Nrows` intervals.
+Imputation substituted median value across all days for each interval, in place of NAs.
 
 ## Are there differences in activity patterns between weekdays and weekends?
 Yes, see the plot differences!

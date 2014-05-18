@@ -8,7 +8,7 @@ date()
 ```
 
 ```
-## [1] "Sun May 18 15:30:35 2014"
+## [1] "Sun May 18 15:45:36 2014"
 ```
 
 ```r
@@ -156,14 +156,16 @@ legend("topright", lty = 1, col = c("red", "blue"), legend = c("Median", "Mean")
 
 ![plot of chunk unnamed-chunk-3](figure/unnamed-chunk-3.png) 
 
-```r
-
-```
-
 
 ## Imputing missing values
-Imputation substituted median value across all days for each interval, in place of NAs 
 
+```r
+Nnas <- sum(is.na(DA$steps))
+Nrows <- dim(DA)[1]
+```
+
+In the original data, there were 2304 NAs out of 17568 intervals.
+Imputation substituted median value across all days for each interval, in place of NAs.
 
 ## Are there differences in activity patterns between weekdays and weekends?
 Yes, see the plot differences!
@@ -187,5 +189,5 @@ grid()
 legend("topright", lty = 1, col = c("red", "blue"), legend = c("Median", "Mean"))
 ```
 
-![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-4.png) 
+![plot of chunk unnamed-chunk-5](figure/unnamed-chunk-5.png) 
 
