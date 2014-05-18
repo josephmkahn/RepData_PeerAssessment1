@@ -1,14 +1,30 @@
-# Reproducible Research: Peer Assessment 1
-
+# Reproducible Research: Peer Assessment 1, Joseph 
 
 ## Loading and preprocessing the data
-
-
+'''{r}
+date()
+library(plyr)
+basedir <- file.path("C:","Users","browse","reproducibleresearch","RepData_PeerAssessment1")
+datadir <- file.path(basedir,"activity")
+DA <- read.csv(file.path(datadir,"activity.csv"),as.is=TRUE) # data frame
+head(DA,15)
+# looks like interval is concatonated hour minutes, so have to separate:
+DA$hour <- floor(DA$interval/100)
+DA$minute <- DA$interval - 100*DA$hour
+head(DA,15)
+dim(DA)
+'''
 
 ## What is mean total number of steps taken per day?
+By linearity of sums, mean daily steps is the sum of the mean in each interval: 
 
-
-
+'''{r}
+# get mean across all days for each interval, ignoring NAs: 
+DI <- ddply(DA,"interval",function(D){mean(D$steps,na.rm=TRUE)})
+MeanStepsPerDay <- sum(DI$V1)
+MeanStepsPerDay
+'''
+MeanStepsPer
 ## What is the average daily activity pattern?
 
 
